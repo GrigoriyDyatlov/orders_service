@@ -14,4 +14,12 @@ public class OrderDto {
     String currency;
     Integer totalCost;
     List<String> listOfGoods;
+
+    public static OrderDto fromEntity (Order order){
+        return new OrderDto(
+                order.getUserId(),
+                order.getCurrency(),
+                order.getTotalCost(),
+                order.getListOfGoods());
+    }
 }

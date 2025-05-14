@@ -22,10 +22,12 @@ public class OrderResource {
     private final ObjectMapper objectMapper;
 
     @GetMapping("/by-user/{userId}")
-    public OrderDto getUserOrders(@PathVariable String userId) {
-      return new OrderDto("12312", "$", 1234, List.of("dsfsdfsdf", "asdasd"));
-
-//        return orderRepository.getUsersOrder(userId);
+    public List<OrderDto> getUserOrders(@PathVariable String userId) {
+//      return new OrderDto("12312", "$", 1234, List.of("dsfsdfsdf", "asdasd"));
+List<Order> orders = orderRepository.getUsersOrder(userId);
+        return orders.stream()
+                .map(OrderDto::fromEntity)
+                .toList();
     }
 
 }
